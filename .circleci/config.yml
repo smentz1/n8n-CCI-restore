@@ -9,7 +9,7 @@ jobs:
       - run:
           name: Descargar workflow desde GitHub
           command: |
-            curl -o Backup workflow.json https://github.com/smentz1/n8n-CCI-restore/blob/main/workflows/Backup%20workflow.json
+            curl -o workflow.json https://github.com/smentz1/n8n-CCI-restore/blob/main/workflows/Backup%20workflow.json
       - run:
           name: Desplegar workflow a n8n
           command: |
