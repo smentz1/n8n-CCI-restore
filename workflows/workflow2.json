@@ -1,0 +1,40 @@
+{
+  "name": "Saludo desde API",
+  "nodes": [
+    {
+      "parameters": {
+        "functionCode": "return [{ json: { mensaje: '¡Hola desde la API!' } }];"
+      },
+      "id": "1",
+      "name": "Generar mensaje",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "text": "={{$json.mensaje}}"
+      },
+      "id": "2",
+      "name": "Mostrar mensaje",
+      "type": "n8n-nodes-base.console",
+      "typeVersion": 1,
+      "position": [500, 300]
+    }
+  ],
+  "connections": {
+    "Generar mensaje": {
+      "main": [
+        [
+          {
+            "node": "Mostrar mensaje",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "version": 1
+}
