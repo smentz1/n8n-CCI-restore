@@ -332,7 +332,6 @@
       ]
     }
   ],
-  "pinData": {},
   "connections": {
     "Execute workflow": {
       "main": [
@@ -478,10 +477,5 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "420b8a7c-655c-4af4-8973-57495851c460",
-  "meta": {
-    "instanceId": "fffc4549a16cc07793e98bfcede5f75cc9df1a390d69fa64d52583c8089d46f1"
-  },
-  "id": "TBjsIbNEMabaDClF",
   "tags": []
 }
