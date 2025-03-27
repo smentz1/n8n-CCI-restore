@@ -3,26 +3,26 @@
   "nodes": [
     {
       "parameters": {},
-      "id": "3e8adf8a-32b0-4140-a4dc-8169bbc11570",
+      "id": "162cfd2d-408c-414c-bd8e-7ced478cc6f5",
       "name": "Execute workflow",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -2220,
-        180
+        -1580,
+        420
       ]
     },
     {
       "parameters": {
         "options": {}
       },
-      "id": "12b954bf-ba15-443f-af09-c9396de7e37c",
+      "id": "6b557195-f001-4246-a7f5-23bf1585bf57",
       "name": "Set date",
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 2,
       "position": [
-        -2020,
-        180
+        -1380,
+        420
       ]
     },
     {
@@ -33,13 +33,13 @@
         "customFormat": "dd-MM-yyyy/H:mm",
         "options": {}
       },
-      "id": "2b3737e0-fe3a-4e7a-afd1-593276f55705",
+      "id": "b93f1692-6ac8-40ef-b3e8-88d681666dc2",
       "name": "Format date",
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 2,
       "position": [
-        -1820,
-        180
+        -1180,
+        420
       ]
     },
     {
@@ -55,13 +55,13 @@
         },
         "options": {}
       },
-      "id": "e90fa8f9-3bdc-4065-a0d4-3bf39d97d2b0",
+      "id": "c37c8e7b-3053-4cc0-be74-3118eeb2be87",
       "name": "Set commit date",
       "type": "n8n-nodes-base.set",
       "typeVersion": 2,
       "position": [
-        -1620,
-        180
+        -980,
+        420
       ]
     },
     {
@@ -81,13 +81,13 @@
         },
         "filePath": "="
       },
-      "id": "9aa77412-fa68-4e9b-9bb0-0953699ffe0b",
+      "id": "2175fc53-b7f7-4179-ae3c-9c3f1f06ee4b",
       "name": "List files from repository [GITHUB]",
       "type": "n8n-nodes-base.github",
       "typeVersion": 1,
       "position": [
-        -1420,
-        180
+        -780,
+        420
       ],
       "alwaysOutputData": true,
       "credentials": {
@@ -109,13 +109,13 @@
         },
         "options": {}
       },
-      "id": "506a1c76-7826-481a-a0ca-4f031b84ca1b",
+      "id": "2edcd71e-d547-477d-8ee3-f50b9ac1d5f1",
       "name": "Combine file names [GITHUB]",
       "type": "n8n-nodes-base.itemLists",
       "typeVersion": 2.1,
       "position": [
-        -1220,
-        180
+        -580,
+        420
       ]
     },
     {
@@ -123,13 +123,13 @@
         "filters": {},
         "requestOptions": {}
       },
-      "id": "f056b5e2-837c-4a31-abb3-4d065e1b7a1f",
+      "id": "1fc299bd-fc18-4a3c-9847-736c31434eb7",
       "name": "Retrieve workflows [N8N]",
       "type": "n8n-nodes-base.n8n",
       "typeVersion": 1,
       "position": [
-        -1020,
-        180
+        -380,
+        420
       ],
       "credentials": {
         "n8nApi": {
@@ -145,13 +145,13 @@
           "fileName": "={{ $json.name.replace(/\\s+/g, '-').toLowerCase() }}-{{ $json.id }}.json"
         }
       },
-      "id": "d8142447-fea4-4d28-a7c9-6020ccc57ac9",
+      "id": "33de9626-ef8f-4713-9351-27fc94130f6d",
       "name": "Move JSON to binary",
       "type": "n8n-nodes-base.moveBinaryData",
       "typeVersion": 1,
       "position": [
-        -820,
-        180
+        -180,
+        420
       ]
     },
     {
@@ -159,13 +159,13 @@
         "batchSize": 1,
         "options": {}
       },
-      "id": "2e7c3417-e39e-4897-ac3b-570bd8cd729f",
+      "id": "f1dd0a20-271b-4628-833a-82120d501285",
       "name": "Split to single items",
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 2,
       "position": [
-        -580,
-        180
+        60,
+        420
       ]
     },
     {
@@ -180,13 +180,13 @@
           ]
         }
       },
-      "id": "9ecddd1e-79be-421f-bf6d-7a9d4bf7442a",
+      "id": "e10f3c99-fe5f-48f0-97be-be8b90f1fd13",
       "name": "Check if file exists in repository",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        -340,
-        100
+        300,
+        340
       ]
     },
     {
@@ -208,13 +208,13 @@
         "binaryData": true,
         "commitMessage": "=backup-{{ $node['Set commit date'].json.commitDate }}"
       },
-      "id": "d60ec0bd-fae3-4302-9c31-72e840adc7c3",
+      "id": "6e351e9f-bb60-4ce3-9113-d31fc3fab050",
       "name": "Update file [GITHUB]",
       "type": "n8n-nodes-base.github",
       "typeVersion": 1,
       "position": [
-        -120,
-        -100
+        520,
+        140
       ],
       "credentials": {
         "githubOAuth2Api": {
@@ -241,13 +241,13 @@
         "binaryData": true,
         "commitMessage": "=backup-{{ $node['Set commit date'].json.commitDate }}"
       },
-      "id": "bc88c8e3-b417-4b57-be52-14dfed95931c",
+      "id": "bd2fb666-43ab-479f-9a22-7a5ec72f6739",
       "name": "Upload file [GITHUB]",
       "type": "n8n-nodes-base.github",
       "typeVersion": 1,
       "position": [
-        -120,
-        300
+        520,
+        540
       ],
       "credentials": {
         "githubOAuth2Api": {
@@ -262,13 +262,13 @@
         "height": 339.51767272727324,
         "width": 182.4715262478496
       },
-      "id": "f5177c02-1dec-4f93-b97d-bd2495a53668",
+      "id": "936e9242-1c80-4fb3-b220-385bb36e7173",
       "name": "Sticky Note",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -2260,
-        20
+        -1620,
+        260
       ]
     },
     {
@@ -277,13 +277,13 @@
         "height": 339.42690909090965,
         "width": 585.4045090909088
       },
-      "id": "7ed824fa-5cbc-47e3-8a8b-127466f4f1a3",
+      "id": "4c7f579d-4643-4cca-a363-38a863eadd41",
       "name": "Sticky Note1",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -2060,
-        20
+        -1420,
+        260
       ]
     },
     {
@@ -292,13 +292,13 @@
         "height": 339.42690909090965,
         "width": 389.89265454545443
       },
-      "id": "0d3d3641-88e2-4514-8d5a-79a348413b73",
+      "id": "a5c9c44c-155d-4b42-ad4f-3b1463d2a628",
       "name": "Sticky Note2",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -1460,
-        20
+        -820,
+        260
       ]
     },
     {
@@ -307,13 +307,13 @@
         "height": 339.42690909090965,
         "width": 384.14708363636373
       },
-      "id": "5284de20-fbc3-4bff-97a8-94169c081504",
+      "id": "3af575dd-8768-4155-af74-0b0ce92e2231",
       "name": "Sticky Note3",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -1040,
-        20
+        -400,
+        260
       ]
     },
     {
@@ -322,13 +322,13 @@
         "height": 731.633426614796,
         "width": 703.8733020263451
       },
-      "id": "d1b73e75-ffc7-404c-a9b6-1729b81936b6",
+      "id": "6b954980-3c84-4a48-bbe5-21647edbb324",
       "name": "Sticky Note4",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -640,
-        -240
+        0,
+        0
       ]
     }
   ],
@@ -478,7 +478,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "32aadc92-bb5e-4b71-bf50-9bba450554fb",
+  "versionId": "420b8a7c-655c-4af4-8973-57495851c460",
   "meta": {
     "instanceId": "fffc4549a16cc07793e98bfcede5f75cc9df1a390d69fa64d52583c8089d46f1"
   },
