@@ -9,7 +9,8 @@
         -1580,
         420
       ],
-      "parameters": {}
+      "parameters": {},
+      "settings": {}
     },
     {
       "name": "Set date",
@@ -21,7 +22,8 @@
       ],
       "parameters": {
         "options": {}
-      }
+      },
+      "settings": {}
     },
     {
       "name": "Format date",
@@ -37,7 +39,8 @@
         "format": "custom",
         "customFormat": "dd-MM-yyyy/H:mm",
         "options": {}
-      }
+      },
+      "settings": {}
     },
     {
       "name": "Set commit date",
@@ -58,7 +61,8 @@
           ]
         },
         "options": {}
-      }
+      },
+      "settings": {}
     },
     {
       "name": "List files from repository [GITHUB]",
@@ -83,7 +87,8 @@
           "mode": "url"
         },
         "filePath": "="
-      }
+      },
+      "settings": {}
     },
     {
       "name": "Combine file names [GITHUB]",
@@ -103,7 +108,8 @@
           ]
         },
         "options": {}
-      }
+      },
+      "settings": {}
     },
     {
       "name": "Retrieve workflows [N8N]",
@@ -116,7 +122,8 @@
       "parameters": {
         "filters": {},
         "requestOptions": {}
-      }
+      },
+      "settings": {}
     },
     {
       "name": "Move JSON to binary",
@@ -131,7 +138,8 @@
         "options": {
           "fileName": "={{ $json.name.replace(/\\s+/g, '-').toLowerCase() }}-{{ $json.id }}.json"
         }
-      }
+      },
+      "settings": {}
     },
     {
       "name": "Split to single items",
@@ -144,7 +152,8 @@
       "parameters": {
         "batchSize": 1,
         "options": {}
-      }
+      },
+      "settings": {}
     },
     {
       "name": "Check if file exists in repository",
@@ -164,7 +173,8 @@
             }
           ]
         }
-      }
+      },
+      "settings": {}
     },
     {
       "name": "Update file [GITHUB]",
@@ -191,7 +201,8 @@
         "filePath": "={{ $binary.data.fileName }}",
         "binaryData": true,
         "commitMessage": "=backup-{{ $node['Set commit date'].json.commitDate }}"
-      }
+      },
+      "settings": {}
     },
     {
       "name": "Upload file [GITHUB]",
@@ -217,7 +228,8 @@
         "filePath": "={{ $binary.data.fileName }}",
         "binaryData": true,
         "commitMessage": "=backup-{{ $node['Set commit date'].json.commitDate }}"
-      }
+      },
+      "settings": {}
     }
   ],
   "connections": {
