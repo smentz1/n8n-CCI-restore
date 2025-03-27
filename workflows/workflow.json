@@ -83,8 +83,7 @@
       "position": [
         -780,
         420
-      ],
-      "alwaysOutputData": true
+      ]
     },
     {
       "parameters": {
@@ -361,10 +360,5 @@
         ]
       ]
     }
-  },
-  "active": false,
-  "settings": {
-    "executionOrder": "v1"
-  },
-  "tags": []
+  }
 }
