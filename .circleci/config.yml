@@ -13,9 +13,9 @@ jobs:
       - run:
           name: Desplegar workflow a n8n
           command: |
-            curl -X POST "https://n8n.rec.beymedias.com/api/v1/workflows" \
+            curl -X POST "$N8N_URL/rest/workflows" \
               -H "Content-Type: application/json" \
-              -H "Authorization: Bearer $N8N_API_KEY" \
+              -H "X-N8N-API-KEY: $N8N_API_KEY" \
               -d @workflow.json
 
 workflows:
