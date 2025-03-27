@@ -2,44 +2,51 @@
   "name": "workflow",
   "nodes": [
     {
-      "parameters": {},
       "name": "Execute workflow",
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
         -1580,
         420
-      ]
+      ],
+      "parameters": {}
     },
     {
-      "parameters": {
-        "options": {}
-      },
       "name": "Set date",
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 2,
       "position": [
         -1380,
         420
-      ]
+      ],
+      "parameters": {
+        "options": {}
+      }
     },
     {
-      "parameters": {
-        "operation": "formatDate",
-        "date": "={{ $json.currentDate }}",
-        "format": "custom",
-        "customFormat": "dd-MM-yyyy/H:mm",
-        "options": {}
-      },
       "name": "Format date",
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 2,
       "position": [
         -1180,
         420
-      ]
+      ],
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $json.currentDate }}",
+        "format": "custom",
+        "customFormat": "dd-MM-yyyy/H:mm",
+        "options": {}
+      }
     },
     {
+      "name": "Set commit date",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [
+        -980,
+        420
+      ],
       "parameters": {
         "keepOnlySet": true,
         "values": {
@@ -51,16 +58,16 @@
           ]
         },
         "options": {}
-      },
-      "name": "Set commit date",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 2,
-      "position": [
-        -980,
-        420
-      ]
+      }
     },
     {
+      "name": "List files from repository [GITHUB]",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        -780,
+        420
+      ],
       "parameters": {
         "authentication": "oAuth2",
         "resource": "file",
@@ -76,16 +83,16 @@
           "mode": "url"
         },
         "filePath": "="
-      },
-      "name": "List files from repository [GITHUB]",
-      "type": "n8n-nodes-base.github",
-      "typeVersion": 1,
-      "position": [
-        -780,
-        420
-      ]
+      }
     },
     {
+      "name": "Combine file names [GITHUB]",
+      "type": "n8n-nodes-base.itemLists",
+      "typeVersion": 2.1,
+      "position": [
+        -580,
+        420
+      ],
       "parameters": {
         "operation": "aggregateItems",
         "fieldsToAggregate": {
@@ -96,57 +103,57 @@
           ]
         },
         "options": {}
-      },
-      "name": "Combine file names [GITHUB]",
-      "type": "n8n-nodes-base.itemLists",
-      "typeVersion": 2.1,
-      "position": [
-        -580,
-        420
-      ]
+      }
     },
     {
-      "parameters": {
-        "filters": {},
-        "requestOptions": {}
-      },
       "name": "Retrieve workflows [N8N]",
       "type": "n8n-nodes-base.n8n",
       "typeVersion": 1,
       "position": [
         -380,
         420
-      ]
+      ],
+      "parameters": {
+        "filters": {},
+        "requestOptions": {}
+      }
     },
     {
-      "parameters": {
-        "mode": "jsonToBinary",
-        "options": {
-          "fileName": "={{ $json.name.replace(/\\s+/g, '-').toLowerCase() }}-{{ $json.id }}.json"
-        }
-      },
       "name": "Move JSON to binary",
       "type": "n8n-nodes-base.moveBinaryData",
       "typeVersion": 1,
       "position": [
         -180,
         420
-      ]
+      ],
+      "parameters": {
+        "mode": "jsonToBinary",
+        "options": {
+          "fileName": "={{ $json.name.replace(/\\s+/g, '-').toLowerCase() }}-{{ $json.id }}.json"
+        }
+      }
     },
     {
-      "parameters": {
-        "batchSize": 1,
-        "options": {}
-      },
       "name": "Split to single items",
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 2,
       "position": [
         60,
         420
-      ]
+      ],
+      "parameters": {
+        "batchSize": 1,
+        "options": {}
+      }
     },
     {
+      "name": "Check if file exists in repository",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        300,
+        340
+      ],
       "parameters": {
         "conditions": {
           "string": [
@@ -157,16 +164,16 @@
             }
           ]
         }
-      },
-      "name": "Check if file exists in repository",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 1,
-      "position": [
-        300,
-        340
-      ]
+      }
     },
     {
+      "name": "Update file [GITHUB]",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        520,
+        140
+      ],
       "parameters": {
         "authentication": "oAuth2",
         "resource": "file",
@@ -184,16 +191,16 @@
         "filePath": "={{ $binary.data.fileName }}",
         "binaryData": true,
         "commitMessage": "=backup-{{ $node['Set commit date'].json.commitDate }}"
-      },
-      "name": "Update file [GITHUB]",
+      }
+    },
+    {
+      "name": "Upload file [GITHUB]",
       "type": "n8n-nodes-base.github",
       "typeVersion": 1,
       "position": [
         520,
-        140
-      ]
-    },
-    {
+        540
+      ],
       "parameters": {
         "authentication": "oAuth2",
         "resource": "file",
@@ -210,14 +217,7 @@
         "filePath": "={{ $binary.data.fileName }}",
         "binaryData": true,
         "commitMessage": "=backup-{{ $node['Set commit date'].json.commitDate }}"
-      },
-      "name": "Upload file [GITHUB]",
-      "type": "n8n-nodes-base.github",
-      "typeVersion": 1,
-      "position": [
-        520,
-        540
-      ]
+      }
     }
   ],
   "connections": {
